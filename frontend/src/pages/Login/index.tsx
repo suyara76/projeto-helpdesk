@@ -159,7 +159,7 @@ export default function Login(){
       </div>
 
       {/*--------------------------------DIREITA--------------------------------------------------*/}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-slate-900 to-slate-950 items-center justify-center relative overflow-hidden p-12">
+      <div className="hidden lg:flex w-1/2 bg-slate-900 items-center justify-center relative p-12">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10"></div>
 
         <div className="text-center relative z-10 max-w-md">

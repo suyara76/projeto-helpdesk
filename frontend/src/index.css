@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+@layer base{
+  :root {
+    --color-laranja: 242 101 34;      
+    --color-laranja-hover: 217 82 22;
+  }
+}
+.bg-laranja{
+  background-color: rgb(var(--color-laranja)) !important;
+}
+.hover\:bg-laranja-hover:hover {
+  background-color: rgb(var(--color-laranja-hover)) !important;
+}
+.text-laranja{
+  color: rgb(var(--color-laranja)) !important;
+}
+.hover\:text-laranja-hover:hover{
+  color: rgb(var(--color-laranja-hover)) !important;
+}
+.focus\:ring-laranja:focus{
+  --tw-ring-color: rgb(var(--color-laranja)) !important;
+}

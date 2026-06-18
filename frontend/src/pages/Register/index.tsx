@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle } from 'lucide-react';
 
 export default function Login(){
   const [email, setEmail] = useState('');
@@ -67,7 +67,7 @@ export default function Login(){
         </div>
 
         <div className="w-full max-w-md mx-auto">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-2">Entrar</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-2">Cadastro</h1>
           <p className="text-sm text-slate-500 mb-8">Insira seu e-mail e senha cadastrados para acessar sua conta</p>
 
           {/*funçao handleSubmit do formulário*/}
@@ -141,10 +141,7 @@ export default function Login(){
               {isSubmitting ?(
                 <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
               ) : (
-                <>
-                  <LogIn className="w-4 h-4" />
-                  Entrar
-                </>
+                "Entrar"
               )}
             </button>
           </form>
@@ -159,7 +156,7 @@ export default function Login(){
       </div>
 
       {/*--------------------------------DIREITA--------------------------------------------------*/}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-slate-900 to-slate-950 items-center justify-center relative overflow-hidden p-12">
+      <div className="hidden lg:flex w-1/2 bg-slate-900 items-center justify-center relative p-12">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10"></div>
 
         <div className="text-center relative z-10 max-w-md">

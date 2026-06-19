@@ -82,9 +82,9 @@ return (
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-16 lg:px-24 xl:px-32 relative bg-white">
         
         <div className="absolute top-8 left-8 sm:left-16 lg:left-24">
-          <button type="button" className="text-sm text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors">
+          <Link to="/" className="text-sm text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors">
             Voltar para o Login
-          </button>
+          </Link>
         </div>
 
         <div className="w-full max-w-md mx-auto">

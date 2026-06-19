@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Login(){
   const [email, setEmail] = useState('');
@@ -148,9 +149,9 @@ export default function Login(){
 
           <p className="mt-6 text-center text-sm text-slate-500">
             Não tem uma conta?{' '}
-            <button type="button" className="font-medium text-laranja hover:text-laranja-hover transition-colors">
+            <Link to="/Register" className="font-medium text-laranja hover:text-laranja-hover transition-colors">
               Cadastre-se aqui.
-            </button>
+            </Link>
           </p>
         </div>
       </div>

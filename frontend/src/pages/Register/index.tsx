@@ -1,24 +1,46 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export default function Login(){
+export default function Register(){
+  const [nome, setNome] = useState(''); // acrescentei nome e sobrenome
+  const [sobrenome, setSobrenome] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   //aguarda as mensagens de erro de validacao
+  const [nomeError, setNomeError] = useState('');
+  const [sobrenomeError, setSobrenomeError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
+
 
   const handleSubmit = async (e: React.FormEvent) =>{
     e.preventDefault();
 
+    setNomeError('');
+    setSobrenomeError('');
     setEmailError('');
     setPasswordError('');
 
     let temErro = false;
+
+    //validação do nomme
+    if(!nome){
+      setNomeError('O nome é obrigatório.');
+      temErro = true;
+    }
+
+    //validaçao do sobrenome
+    if (!sobrenome) {
+      setSobrenomeError('O sobrenome é obrigatório.');
+      temErro = true;
+    }
 
     //validação email
     if (!email){
@@ -43,37 +65,81 @@ export default function Login(){
     //feedback positivo
     try{
       setIsSubmitting(true);
-      
       await new Promise((resolve) => setTimeout(resolve, 1500));
       
-      console.log('Dados enviados com sucesso:', { email, password });
+      console.log('Cadastro realizado com sucesso:', { nome, sobrenome, email, password });
     }catch(error){
-      console.error('Erro ao autenticar:', error);
+      console.error('Erro ao cadastrar:', error);
     }finally{
       setIsSubmitting(false);
     }
   };
 
-  return(
+return (
     <div className="min-h-screen w-full flex bg-white text-slate-900 font-sans">
       
-      {/* --------------------ESQUERDA -------------------------*/}
+      {/* -------------------- ESQUERDA ------------------------- */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-16 lg:px-24 xl:px-32 relative bg-white">
         
         <div className="absolute top-8 left-8 sm:left-16 lg:left-24">
           <button type="button" className="text-sm text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors">
-            Voltar para Home
+            Voltar para o Login
           </button>
         </div>
 
         <div className="w-full max-w-md mx-auto">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-2">Cadastro</h1>
-          <p className="text-sm text-slate-500 mb-8">Insira seu e-mail e senha cadastrados para acessar sua conta</p>
+          <p className="text-sm text-slate-500 mb-8">Insira suas informações para acessar a plataforma</p>
 
-          {/*funçao handleSubmit do formulário*/}
+          {/* Função handleSubmit do formulário */}
           <form onSubmit={handleSubmit} className="space-y-5">
             
-            {/*email*/}
+            {/* Bloco contendo Nome e Sobrenome lado a lado */}
+            <div className="flex gap-4">
+              {/* Caixa de Nome */}
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Nome <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ex.: Marcia"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                  className={`w-full px-4 py-2.5 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-laranja transition-all
+                    ${nomeError ? 'border-red-500 focus:ring-red-500' : 'border-slate-200'}`}
+                />
+                {nomeError && (
+                  <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5" />
+                    {nomeError}
+                  </p>
+                )}
+              </div>
+
+              {/* Caixa de Sobrenome */}
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Sobrenome <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Ex: Santos"
+                  value={sobrenome}
+                  onChange={(e) => setSobrenome(e.target.value)}
+                  className={`w-full px-4 py-2.5 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-laranja transition-all
+                    ${sobrenomeError ? 'border-red-500 focus:ring-red-500' : 'border-slate-200'}`}
+                />
+                {sobrenomeError && (
+                  <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5" />
+                    {sobrenomeError}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 E-mail <span className="text-red-500">*</span>
@@ -82,11 +148,11 @@ export default function Login(){
                 type="text"
                 placeholder="seunome@empresa.org.br"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} //atualiza o estado
+                onChange={(e) => setEmail(e.target.value)}
                 className={`w-full px-4 py-2.5 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-laranja transition-all
                   ${emailError ? 'border-red-500 focus:ring-red-500' : 'border-slate-200'}`}
               />
-              {emailError &&(
+              {emailError && (
                 <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
                   <AlertCircle className="w-3.5 h-3.5" />
                   {emailError}
@@ -94,17 +160,11 @@ export default function Login(){
               )}
             </div>
 
-            {/*senha*/}
+            {/* Senha */}
             <div>
-              <div className="flex justify-between items-center mb-1.5">
-                <label className="text-sm font-medium text-slate-700">
-                  Senha <span className="text-red-500">*</span>
-                </label>
-                <button type="button" className="text-xs font-medium text-laranja hover:text-laranja-hover transition-colors">
-                  Esqueci senha
-                </button>
-              </div>
-
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Senha <span className="text-red-500">*</span>
+              </label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -131,26 +191,25 @@ export default function Login(){
               )}
             </div>
 
-            {/*botao enviar*/}
+            {/* Botão enviar */}
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-2 bg-laranja hover:bg-laranja-hover disabled:bg-orange-300 text-white
-              font-medium py-2.5 px-4 rounded-lg shadow-sm transition-colors text-sm disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 bg-laranja hover:bg-laranja-hover disabled:bg-orange-300 text-white font-medium py-2.5 px-4 rounded-lg shadow-sm transition-colors text-sm disabled:cursor-not-allowed"
             >
-              {isSubmitting ?(
+              {isSubmitting ? (
                 <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
               ) : (
-                "Entrar"
+                "Cadastrar"
               )}
             </button>
           </form>
 
           <p className="mt-6 text-center text-sm text-slate-500">
-            Não tem uma conta?{' '}
-            <button type="button" className="font-medium text-laranja hover:text-laranja-hover transition-colors">
-              Cadastre-se aqui.
-            </button>
+            Já possui uma conta?{' '}
+            <Link to="/" className="font-medium text-laranja hover:text-laranja-hover transition-colors">
+              Faça login aqui.
+            </Link>
           </p>
         </div>
       </div>
@@ -169,7 +228,6 @@ export default function Login(){
           </p>
         </div>
       </div>
-
     </div>
   );
 }
